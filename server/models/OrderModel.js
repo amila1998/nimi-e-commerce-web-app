@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 
-const paymentSchema = new mongoose.Schema({
+const orderSchema = new mongoose.Schema({
     user_id: {
         type: String,
         required: true
@@ -14,12 +14,12 @@ const paymentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    paymentID:{
-        type: String,
-        required: true
-    },
     address:{
         type: Object,
+        required: true
+    },
+    total:{
+        type: String,
         required: true
     },
     cart:{
@@ -35,4 +35,4 @@ const paymentSchema = new mongoose.Schema({
 })
 
 
-module.exports = mongoose.model("Payments", paymentSchema)
+module.exports = mongoose.model("Orders", orderSchema)

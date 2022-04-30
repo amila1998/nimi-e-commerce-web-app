@@ -1,5 +1,5 @@
 const Users = require('../models/userModel')
-const Payments = require('../models/paymentModel')
+const Orders = require('../models/OrderModel')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
@@ -117,7 +117,7 @@ const userController = {
     },
     history: async(req, res) =>{
         try {
-            const history = await Payments.find({user_id: req.user.id})
+            const history = await Orders.find({user_id: req.user.id})
 
             res.json(history)
         } catch (err) {

@@ -20,7 +20,7 @@ app.use('/user', require('./routes/userRouter'))
 app.use('/api', require('./routes/catelogRouter'))
 app.use('/api', require('./routes/upload'))
 app.use('/api', require('./routes/productRouter'))
-app.use('/api', require('./routes/paymentRouter'))
+app.use('/api', require('./routes/orderRouter'))
 
 
 

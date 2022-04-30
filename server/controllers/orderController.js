@@ -1,28 +1,28 @@
-const Payments = require('../models/paymentModel')
+const Orders = require('../models/OrderModel')
 const Users = require('../models/userModel')
 const Products = require('../models/productModel')
 
 
-const paymentController = {
-    getPayments: async(req, res) =>{
+const orderController = {
+    getOrders: async(req, res) =>{
         try {
-            const payments = await Payments.find()
-            res.json(payments)
+            const orders = await Orders.find()
+            res.json( orders)
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
     },
-    createPayment: async(req, res) => {
+    createOrder: async(req, res) => {
         try {
             const user = await Users.findById(req.user.id).select('name email')
             if(!user) return res.status(400).json({msg: "User does not exist."})
 
-            const {cart, paymentID, address} = req.body;
+            const {cart, address, total} = req.body;
 
             const {_id, name, email} = user;
 
-            const newPayment = new Payments({
-                user_id: _id, name, email, cart, paymentID, address
+            const newOrder = new Orders({
+                user_id: _id, name, email, cart, address , total
             })
 
             cart.filter(item => {
@@ -30,12 +30,23 @@ const paymentController = {
             })
 
             
-            await newPayment.save()
-            res.json({msg: "Payment Succes!"})
+            await newOrder.save()
+            res.json({msg: "Order Success!"})
             
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
+    },
+    editOrder: async(req, res) => {
+         try {
+            await Orders.findOneAndUpdate({_id: req.params.oid}, {
+                status: true
+            })
+            res.json({msg: "Order Conformed!"})
+        } catch (error) {
+            res.json({msg: error.message})
+        }
+       
     }
 }
 
@@ -45,4 +56,4 @@ const sold = async (id, quantity, oldSold) =>{
     })
 }
 
-module.exports = paymentController
+module.exports = orderController
