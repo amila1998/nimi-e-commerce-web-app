@@ -1,0 +1,30 @@
+{
+  "name": "nimi-e-commerce-web-app",
+  "version": "1.0.0",
+  "description": "[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/amila1998/nimi-e-commerce-web-app)",
+  "main": "index.js",
+  "scripts": {
+    "client": "cd client && npm run start",
+    "server": "cd server  && npm run dev",
+    "app-install":"npm install",
+    "server-install": "cd server  && npm install",
+    "client-install": "cd client && npm install",
+    "install-all": "concurrently \"npm run app-install\" \"npm run server-install\" \"npm run client-install\"",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amila1998/nimi-e-commerce-web-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amila1998/nimi-e-commerce-web-app/issues"
+  },
+  "homepage": "https://github.com/amila1998/nimi-e-commerce-web-app#readme",
+  "dependencies": {
+    "concurrently": "^7.1.0"
+  }
+}

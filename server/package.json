@@ -5,13 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "server": "nodemon server.js",
-    "client": "cd.. && cd client && npm run start",
-    "server-install": "npm install",
-    "client-install": "cd.. && cd client && npm install",
-    "install-all": "concurrently \"npm run server-install\" \"npm run client-install\"",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "cd.. && cd client && npm install && npm run build"
+    "dev": "nodemon server.js"
+    
   },
   "repository": {
     "type": "git",
