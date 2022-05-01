@@ -30,7 +30,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/nimi-e-commerce-web-app">
-    <h3 align="center">Best-README-Template</h3>
+    <h3 align="center">NIMI e-Commerce Web Application</h3>
   </a>
 </div>
 
