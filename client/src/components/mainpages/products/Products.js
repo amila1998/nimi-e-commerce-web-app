@@ -6,6 +6,8 @@ import axios from 'axios';
 import Filters from './Filters';
 import LoadMore from './LoadMore';
 import './products.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function Products() {
@@ -34,12 +36,39 @@ function Products() {
                 headers: {Authorization: token}
             })
 
-            await destroyImg
-            await deleteProduct
+            const res = await destroyImg
+            const res2 = await deleteProduct
+            toast.success(res.data.msg, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
+            toast.success(res2.data.msg, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
             setCallback(!callback)
             setLoading(false)
         } catch (err) {
-            alert(err.response.data.msg)
+           
+            toast.error(err.response.data.msg, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
         }
     }
 
@@ -61,6 +90,7 @@ function Products() {
     return (
         <>
         <Filters />
+        <ToastContainer/>
         
         {
             isAdmin && 

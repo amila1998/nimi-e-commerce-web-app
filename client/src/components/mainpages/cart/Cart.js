@@ -2,6 +2,8 @@ import React, {useContext, useState, useEffect} from 'react';
 import {GlobalState} from '../../../GlobalState';
 import axios from 'axios';
 import './cart.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Cart() {
     const state = useContext(GlobalState)
@@ -30,9 +32,30 @@ function Cart() {
     },[cart])
 
     const addToCart = async (cart) =>{
-        await axios.patch('/user/addcart', {cart}, {
+       try {
+        const res = await axios.patch('/user/addcart', {cart}, {
             headers: {Authorization: token}
         })
+        toast.success(res.data.msg, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });
+       } catch (err) {
+        toast.error(err.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });
+       }
     }
 
 
@@ -73,16 +96,46 @@ function Cart() {
 
     const tranSuccess = async() => {
         if(address==""){
-            alert("Pleace fill the Shipping Address");
+            toast.warning("Pleace fill the Shipping Address", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
 
         }else{
-            await axios.post('/api/order', {cart, total, address}, {
-                headers: {Authorization: token}
-            })
-                alert("You have successfully placed an order.")
-                setCart([])
-                addToCart([])
-        
+            try {
+                const res = await axios.post('/api/order', {cart, total, address}, {
+                    headers: {Authorization: token}
+                })
+                toast.success(res.data.msg, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
+                    setCart([])
+                    addToCart([])
+            
+                
+            } catch (err) {
+                toast.error(err.message, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
+            }
+           
         }
 
        
@@ -97,7 +150,7 @@ function Cart() {
 
     return (
         <div className='cartMain'> 
-           
+               <ToastContainer/>
             <div className='cartL'>
                     <div>
                         <label>Name: {user}</label><br/><br/>

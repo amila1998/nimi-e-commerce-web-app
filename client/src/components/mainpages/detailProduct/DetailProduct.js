@@ -4,6 +4,9 @@ import {GlobalState} from '../../../GlobalState';
 import ProductItem from '../utils/productItem/ProductItem';
 import './detailProduct.css';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function DetailProduct() {
     const params = useParams()
@@ -25,7 +28,9 @@ function DetailProduct() {
 
     return (
         <>
+            <ToastContainer/>
             <div className="detail">
+
                 <img src={detailProduct.images.url} alt="" />
                 <div className="box-detail">
                     <div className="row">

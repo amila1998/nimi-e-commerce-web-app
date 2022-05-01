@@ -3,6 +3,8 @@ import React, {useState, useEffect, useContext} from 'react';
 import {useParams} from 'react-router-dom';
 import {GlobalState} from '../../../GlobalState';
 import './history.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function OrderDetails() {
     const state = useContext(GlobalState);
@@ -29,10 +31,30 @@ function OrderDetails() {
                 const res = await axios.put(`/api/order/${params.id}`, {
                     headers: {Authorization: token}
                 });
-                alert(res.data.msg);
+            
+                toast.success(res.data.msg, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
+          
                 
             } catch (error) {
-                alert(error.response.data.msg);
+                
+                toast.error(error.response.data.msg, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
+          
         }
             
        
@@ -44,6 +66,7 @@ function OrderDetails() {
 
     return (
         <div className="history-page">
+             <ToastContainer/>
             <table>
                 <thead>
                     <tr>

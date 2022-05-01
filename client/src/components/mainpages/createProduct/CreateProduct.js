@@ -5,12 +5,15 @@ import Loading from '../utils/loading/Loading';
 import {useNavigate, useParams} from 'react-router-dom';
 import  "./createProduct.css";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const initialState = {
     product_id: '',
     title: '',
     price: 0,
-    description: 'How to and tutorial videos of cool CSS effect, Web Design ideas,JavaScript libraries, Node.',
-    content: 'Welcome to our channel Dev AT. Here you can learn web designing, UI/UX designing, html css tutorials, css animations and css effects, javascript and jquery tutorials and related so on.',
+    description: '',
+    content: '',
     category: '',
     _id: ''
 }
@@ -52,35 +55,107 @@ function CreateProduct() {
     const handleUpload = async e =>{
         e.preventDefault()
         try {
-            if(!isAdmin) return alert("You're not an admin")
+            if(!isAdmin) return toast.warning("You are no an Admin", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
             const file = e.target.files[0]
             
-            if(!file) return alert("File not exist.")
+            if(!file) return toast.warning("File not exist.", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
 
             if(file.size > 1024 * 1024) // 1mb
-                return alert("Size too large!")
+                return toast.warning("File too large.", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
 
             if(file.type !== 'image/jpeg' && file.type !== 'image/png') // 1mb
-                return alert("File format is incorrect.")
+                return toast.warning("File format is incorrect.", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
 
-            let formData = new FormData()
-            formData.append('file', file)
+            let formData = new FormData();
+            formData.append('file', file);
 
-            setLoading(true)
-            const res = await axios.post('/api/upload', formData, {
-                headers: {'content-type': 'multipart/form-data', Authorization: token}
-            })
-            setLoading(false)
-            setImages(res.data)
+            setLoading(true);
+            try {
+                const res = await axios.post('/api/upload', formData, {
+                    headers: {'content-type': 'multipart/form-data', Authorization: token}
+                })
+                setLoading(false);
+                toast.success(res.data.msg, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
+                setImages(res.data);
+            } catch (err) {
+                toast.error(err.message, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
+            }
+            
 
         } catch (err) {
-            alert(err.response.data.msg)
+            toast.error(err.response.data.msg, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
+         
         }
     }
 
     const handleDestroy = async () => {
         try {
-            if(!isAdmin) return alert("You're not an admin")
+            if(!isAdmin) return 
+            toast.warning("You're not an admin", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
             setLoading(true)
             await axios.post('/api/destroy', {public_id: images.public_id}, {
                 headers: {Authorization: token}
@@ -88,7 +163,16 @@ function CreateProduct() {
             setLoading(false)
             setImages(false)
         } catch (err) {
-            alert(err.response.data.msg)
+            toast.error(err.response.data.msg, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
+          
         }
     }
 
@@ -100,22 +184,65 @@ function CreateProduct() {
     const handleSubmit = async e =>{
         e.preventDefault()
         try {
-            if(!isAdmin) return alert("You're not an admin")
-            if(!images) return alert("No Image Upload")
+            if(!isAdmin) return toast.warning("You're not an admin", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
+            if(!images) return toast.warning("No image upload", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
 
             if(onEdit){
-                await axios.put(`/api/products/${product._id}`, {...product, images}, {
+                const res=await axios.put(`/api/products/${product._id}`, {...product, images}, {
                     headers: {Authorization: token}
                 })
+                toast.success(res.data.msg, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
             }else{
-                await axios.post('/api/products', {...product, images}, {
+                const res = await axios.post('/api/products', {...product, images}, {
                     headers: {Authorization: token}
                 })
+                toast.success(res.data.msg, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
             }
             setCallback(!callback)
             history.push("/")
         } catch (err) {
-            alert(err.response.data.msg)
+            toast.error(err.response.data.msg, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
+          
         }
     }
 
@@ -124,6 +251,7 @@ function CreateProduct() {
     }
     return (
         <div className="create_product">
+             <ToastContainer/>
             <div className="upload">
                 <input type="file" name="file" id="file_up" onChange={handleUpload}/>
                 {

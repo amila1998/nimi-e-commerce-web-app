@@ -13,9 +13,16 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "cd.. && cd client && npm install && npm run build"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amila1998/e-commerce-application.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amila1998/e-commerce-application/issues"
+  },
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cloudinary": "^1.29.1",

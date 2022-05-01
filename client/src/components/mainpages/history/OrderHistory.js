@@ -4,6 +4,9 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 import './history.css';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function OrderHistory() {
     const state = useContext(GlobalState)
     const [history, setHistory] = state.userAPI.history
@@ -14,17 +17,31 @@ function OrderHistory() {
     useEffect(() => {
         if(token){
             const getHistory = async() =>{
-                if(isAdmin){
-                    const res = await axios.get('/api/order', {
-                        headers: {Authorization: token}
-                    })
-                    setHistory(res.data)
-                }else{
-                    const res = await axios.get('/user/history', {
-                        headers: {Authorization: token}
-                    })
-                    setHistory(res.data)
+                try {
+                    if(isAdmin){
+                        const res = await axios.get('/api/order', {
+                            headers: {Authorization: token}
+                        })
+                        setHistory(res.data)
+                        
+                    }else{
+                        const res = await axios.get('/user/history', {
+                            headers: {Authorization: token}
+                        })
+                        setHistory(res.data)
+                    }
+                } catch (err) {
+                    toast.error(err.message, {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 }
+              
             }
             getHistory()
         }
@@ -32,6 +49,7 @@ function OrderHistory() {
 
     return (
         <div className="history-page">
+              <ToastContainer/>
             <h2>History</h2>
 
             <h4>You have {history.length} ordered</h4>

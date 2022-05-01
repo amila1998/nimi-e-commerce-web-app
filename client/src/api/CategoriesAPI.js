@@ -7,13 +7,20 @@ function CategoriesAPI() {
 
     useEffect(() =>{
         const getCategories = async () =>{
-            const res = await axios.get('/api/catelog')
-            setCategories(res.data)
+            try {
+                const res = await axios.get('/api/catelog')
+                setCategories(res.data)
+            } catch (error) {
+
+                
+            }
+            
         }
 
         getCategories()
     },[callback])
     return {
+        
         categories: [categories, setCategories],
         callback: [callback, setCallback]
     }

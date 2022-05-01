@@ -2,6 +2,10 @@ import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import './login.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 function Login() {
     const [user, setUser] = useState({
@@ -16,17 +20,38 @@ function Login() {
     const loginSubmit = async e =>{
         e.preventDefault()
         try {
-            await axios.post('/user/login', {...user})
+            const res = await axios.post('/user/login', {...user})
+            toast.success(res.data.msg, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
 
             localStorage.setItem('firstLogin', true)
             
             window.location.href = "/";
+           
         } catch (err) {
-            alert(err.response.data.msg)
+           
+            toast.error(err.message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
         }
     }
 
     return (
+        <>
+       <ToastContainer/>
         <div className="login-page">
             <form onSubmit={loginSubmit}>
                 <h2>Login</h2>
@@ -42,6 +67,8 @@ function Login() {
                 </div>
             </form>
         </div>
+        </>
+        
     )
 }
 

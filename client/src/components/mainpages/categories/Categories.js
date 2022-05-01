@@ -3,6 +3,9 @@ import {GlobalState} from '../../../GlobalState';
 import axios from 'axios';
 import './categories.css';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function Categories() {
     const state = useContext(GlobalState)
     const [categories] = state.categoriesAPI.categories
@@ -16,15 +19,59 @@ function Categories() {
         e.preventDefault()
         try {
             if(onEdit){
-                const res = await axios.put(`/api/catelog/${id}`, {name: category}, {
-                    headers: {Authorization: token}
-                })
-                alert(res.data.msg)
+                try {
+                    const res = await axios.put(`/api/catelog/${id}`, {name: category}, {
+                        headers: {Authorization: token}
+                    })
+                    toast.success(res.data.msg, {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
+                    
+                } catch (err) {
+                    toast.error(err.message, {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
+                }
+               
             }else{
-                const res = await axios.post('/api/catelog', {name: category}, {
-                    headers: {Authorization: token}
-                })
-                alert(res.data.msg)
+                try {
+                    const res = await axios.post('/api/catelog', {name: category}, {
+                        headers: {Authorization: token}
+                    })
+                    toast.success(res.data.msg, {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
+                    
+                } catch (err) {
+                    toast.error(err.message, {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
+                }
+               
             }
             setOnEdit(false)
             setCategory('')
@@ -49,12 +96,22 @@ function Categories() {
             alert(res.data.msg)
             setCallback(!callback)
         } catch (err) {
-            alert(err.response.data.msg)
+            toast.error(err.response.data.msg, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
+           
         }
     }
 
     return (
         <div className="categories">
+                 <ToastContainer/>
             <form onSubmit={createCategory}>
                 <label htmlFor="category">Category</label>
                 <input type="text" name="category" value={category} required

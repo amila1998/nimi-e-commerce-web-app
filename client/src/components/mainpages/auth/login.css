@@ -1,6 +1,6 @@
 .login-page {
   max-width: 500px;
-  border: 2px solid #03a5ce;
+  border: 2px solid #c46901;
   border-radius: 5px;
   padding: 30px;
   margin: 50px auto;
@@ -18,8 +18,8 @@
   height: 40px;
   margin: 10px 0;
   padding: 0 5px;
-  outline: #03a5ce;
-  border: 1px solid #03a5ce;
+  outline: #c46901;
+  border: 1px solid #c46901;
 }
 
 .login-page form .row {
@@ -36,7 +36,7 @@
 
 .login-page form button {
   width: 150px;
-  background: #03a5ce;
+  background: #c46901;
   color: white;
   text-transform: uppercase;
   letter-spacing: 2px;

@@ -3,6 +3,9 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 import './login.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function Register() {
     const [user, setUser] = useState({
@@ -17,19 +20,36 @@ function Register() {
     const registerSubmit = async e =>{
         e.preventDefault()
         try {
-            await axios.post('/user/register', {...user})
-
+            const res = await axios.post('/user/register', {...user})
+            toast.success(res.data.msg, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
             localStorage.setItem('firstLogin', true)
 
             
             window.location.href = "/";
         } catch (err) {
-            alert(err.response.data.msg)
+            toast.error(err.message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
         }
     }
 
     return (
         <div className="login-page">
+             <ToastContainer/>
             <form onSubmit={registerSubmit}>
                 <h2>Register</h2>
                 <input type="text" name="name" required
