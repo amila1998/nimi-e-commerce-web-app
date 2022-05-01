@@ -1,7 +1,9 @@
-import React, {useContext, useState} from 'react'
-import {GlobalState} from '../../GlobalState'
-import Cart from './icon/cart.svg'
-import {Link} from 'react-router-dom'
+import React, {useContext, useState} from 'react';
+import {GlobalState} from '../../GlobalState';
+import Cart from './icon/cart.svg';
+import Menu from './icon/menu.svg';
+import Close from './icon/close.svg';
+import {Link} from 'react-router-dom';
 import axios from 'axios'
 import './header.css'
 
@@ -45,6 +47,9 @@ function Header() {
 
     return (
         <div className='header'>
+             <div className="menu" onClick={() => setMenu(!menu)}>
+                <img src={Menu} alt="" width="30" />
+            </div>
             <div className="logo">
                 <h1>
                     <Link to="/">{isAdmin ? 'Admin' : 'NIMI Shop'}</Link>
@@ -59,7 +64,12 @@ function Header() {
                 {
                     isLogged ? loggedRouter() : <li><Link to="/login">Login ✥ Register</Link></li>
                 }
+                
+                <li onClick={() => setMenu(!menu)}>
+                    <img src={Close} alt="" width="30" className="menu" />
+                </li>
             </ul>
+
 
             {
                 isAdmin ? '' 

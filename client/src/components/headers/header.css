@@ -5,6 +5,7 @@ link {
 .header {
   min-height: 70px;
   width: 100%;
+  z-index: 5;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
