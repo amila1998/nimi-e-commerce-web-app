@@ -93,19 +93,19 @@ This is MERN Stack simple e-commerce web application. There is two roles as Cust
 * [Node.js](https://nodejs.org/en/) - Node.js is an open-source, cross-platform, back-end JavaScript runtime environment that runs on the V8 engine and executes JavaScript code outside a web browser.
 <br/><br/>
 Other used Packages<br/><br/>
-server side:<br/>
-* bcrypt<br/>
-* cloudinary<br/>
-* concurrently<br/>
-* cookie-parser<br/>
-* jsonwebtoken<br/>
-* express-fileupload<br/>
-* cors<br/><br/>
+  server side:<br/>
+    * bcrypt<br/>
+    * cloudinary<br/>
+    * concurrently<br/>
+    * cookie-parser<br/>
+    * jsonwebtoken<br/>
+    * express-fileupload<br/>
+    * cors<br/><br/>
 
-server side:<br/>
-* react-toastify<br/>
-* axios<br/>
-* react-router-dom<br/><br/>
+  client side:<br/>
+    * react-toastify<br/>
+    * axios<br/>
+    * react-router-dom<br/><br/>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
