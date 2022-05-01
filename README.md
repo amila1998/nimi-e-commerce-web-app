@@ -56,7 +56,6 @@
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
-    
     <li><a href="#contact">Contact</a></li>
    
   </ol>
@@ -67,6 +66,19 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+This is MERN Stack simple e-commerce web application. There is two roles as Customer and Admin.
+<p>
+* Customer can view the all products and search products. <br/>
+* Before buy or add to the cart customer must login or register to the system.<br/>
+* After the add to the cart customer can place an order.<br/>
+</p>
+
+<p>
+ * Admin must login to the system (if you want to be an Admin you should register as a customer and go to your mongodb database --> user collection --> edite the role attribute as 1 [role:'1']).<br/>
+  * Admin can create update delete categories.<br/>
+  * Admin can create update delete products.<br/>
+  * Admin can conform the customer's orders.<br/>
+</p>
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -79,7 +91,21 @@
 * [Express.js](https://expressjs.com/) - Express.js, or simply Express, is a back end web application framework for Node.js, released as free and open-source software under the MIT License. It is designed for building web applications and APIs. It has been called the de facto standard server framework for Node.js.
 * [React.js](https://reactjs.org/) - React is a free and open-source front-end JavaScript library for building user interfaces based on UI components.
 * [Node.js](https://nodejs.org/en/) - Node.js is an open-source, cross-platform, back-end JavaScript runtime environment that runs on the V8 engine and executes JavaScript code outside a web browser.
+<br/><br/>
+Other used Packages<br/><br/>
+server side:<br/>
+* bcrypt<br/>
+* cloudinary<br/>
+* concurrently<br/>
+* cookie-parser<br/>
+* jsonwebtoken<br/>
+* express-fileupload<br/>
+* cors<br/><br/>
 
+server side:<br/>
+* react-toastify<br/>
+* axios<br/>
+* react-router-dom<br/><br/>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -88,12 +114,9 @@
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up this project locally.
-To get a local copy up and running follow these simple example steps.
-
 ### Prerequisites
 
-1. Must have an Instralled [Node.js](https://nodejs.org/en/) to your local machine
+1. Must have an Installed [Node.js](https://nodejs.org/en/) to your local machine
 2. Must have a [MongoDB](https://www.mongodb.com/) Account
 3. Must have a [Cloudanary](https://www.cloudimage.io/en/home) Account
 
@@ -126,14 +149,12 @@ To get a local copy up and running follow these simple example steps.
      or to run the Server only
      
       ```sh
-      cd server
-      npm run dev
+       npm run server
      ```
      
      and to run the client
       ```sh
-      cd client
-      npm start
+       npm run client
      ```
      
      Server Running on http://localhost:5000 <br/>
@@ -146,9 +167,23 @@ To get a local copy up and running follow these simple example steps.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+<h3>Customer</h3>
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+<div align="center">
+  <img src="ReadmeDocs/images/productListCustomer.png" alt="Girl in a jacket" width="500" height="300">
+  <img src="ReadmeDocs/images/login.png" alt="Girl in a jacket" width="500" height="300">
+  <img src="ReadmeDocs/images/CustomerReg.png" alt="Girl in a jacket" width="500" height="300">
+  <img src="ReadmeDocs/images/CartItems.png" alt="Girl in a jacket" width="500" height="300"><br/>
+</div>
+  <h3>Admin</h3>
+ 
+<div align="center">
+  <img src="ReadmeDocs/images/orderedList.png" alt="Girl in a jacket" width="500" height="200">
+  <img src="ReadmeDocs/images/orderedItemsDetails.png" alt="Girl in a jacket" width="500" height="200">
+  <img src="ReadmeDocs/images/createCategory.png" alt="Girl in a jacket" width="500" height="200">
+  <img src="ReadmeDocs/images/createProduct.png" alt="Girl in a jacket" width="500" height="300">
+  <img src="ReadmeDocs/images/productAdminView.png" alt="Girl in a jacket" width="500" height="300">
+</div>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
